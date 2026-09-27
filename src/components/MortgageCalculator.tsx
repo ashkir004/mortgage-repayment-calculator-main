@@ -1,5 +1,5 @@
 
-import { useState, useEffect, type ChangeEvent } from "react";
+import { useState, type ChangeEvent } from "react";
 import InputGroup from "./InputGroup";
 import MortgageTypeOptions from "./MortgageTypeOptions";
 import CalculateRepaymentBtn from "./CalculateRepaymentsBtn";
@@ -41,9 +41,28 @@ function MortgageCalculator() {
     function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
 
+        if (form.formStatus === 'initial' && !form.mortgageAmount && !form.mortgageTerm && !form.interestRate && !form.mortgageType) {
+            setForm((prevForm) => ({
+                ...prevForm,
+                formStatus: 'error',
+                formErrors: {
+                    mortgageAmount: 'This field is required',
+                    mortgageTerm: 'This field is required',
+                    interestRate: 'This field is required',
+                    mortgageType: 'This field is required',
+                },
+            }));
+            return;
+        }
+
         if (form.formStatus === 'initial') return;
 
-        const errors = validateForm(form);
+        const errors = validateForm({
+            mortgageAmount: form.mortgageAmount,
+            mortgageTerm: form.mortgageTerm,
+            interestRate: form.interestRate,
+            mortgageType: form.mortgageType,
+        });
         if (Object.keys(errors).length > 0) {
             setForm((prevForm) => ({
                 ...prevForm,
@@ -130,10 +149,6 @@ function MortgageCalculator() {
         });
     }
 
-    useEffect(() => {
-      console.log('Form state changed:', form);
-    }, [form]);
-
     return (
       <main className="flex flex-col gap-0
         lg:flex-row bg-white md:rounded-3xl lg:max-w-6xl lg:shadow-xl/10 lg:shadow-slate-900/50
@@ -161,7 +176,7 @@ function MortgageCalculator() {
                 type="text"
                 inputMode="numeric"
                 dirty={form.formStatus === 'editing' && form.mortgageAmount !== ''}
-                error={form.formStatus === 'error' ? form.formErrors.mortgageAmount: ''}
+                error={form.formStatus === 'error' ? form.formErrors?.mortgageAmount: ''}
                 className="md:col-span-full"
                 onChange={handleAmountChange}
             />
@@ -175,7 +190,7 @@ function MortgageCalculator() {
                 value={form.mortgageTerm}
                 suffix="years"
                 dirty={form.formStatus === 'editing' && form.mortgageTerm !== ''}
-                error={form.formStatus === 'error' ? form.formErrors.mortgageTerm : ''}
+                error={form.formStatus === 'error' ? form.formErrors?.mortgageTerm : ''}
                 onChange={handleTermChange}
             />
 
@@ -188,7 +203,7 @@ function MortgageCalculator() {
                 type="text"
                 inputMode="decimal"
                 dirty={form.formStatus === 'editing' && form.interestRate !== ''}
-                error={form.formStatus === 'error' ? form.formErrors.interestRate : ''}
+                error={form.formStatus === 'error' ? form.formErrors?.interestRate : ''}
                 onChange={handleRateChange}
             />
 
@@ -196,7 +211,7 @@ function MortgageCalculator() {
                 className="md:col-span-full"
                 label="Mortgage Type"
                 name="mortgageType"
-                error={form.formStatus === 'error' ? form.formErrors.mortgageType: ''}
+                error={form.formStatus === 'error' ? form.formErrors?.mortgageType: ''}
                 options={[
                     { label: "Repayment", value: "repayment", checked: form.mortgageType === "repayment" },
                     { label: "Interest Only", value: "interestOnly", checked: form.mortgageType === "interestOnly" },

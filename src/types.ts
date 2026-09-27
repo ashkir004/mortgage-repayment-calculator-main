@@ -4,8 +4,8 @@ export type FormData = {
     mortgageTerm: string;
     interestRate: string;
     mortgageType: string;
-    formStatus: 'initial' | 'editing' | 'success' | 'error';
-    formErrors: {
+    formStatus?: 'initial' | 'editing' | 'success' | 'error';
+    formErrors?: {
         [key: string]: string;
     };
 };
