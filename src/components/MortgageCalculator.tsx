@@ -147,6 +147,7 @@ function MortgageCalculator() {
             <div className="flex flex-col gap-1 items-start md:flex-row md:justify-between md:col-span-full">
                 <h1 className='text-2xl text-slate-900' >Mortgage Calculator</h1>
                 <button 
+                    type="button"
                     onClick={handleClearForm}
                     className='text-base text-slate-700'>Clear All</button>
             </div>
