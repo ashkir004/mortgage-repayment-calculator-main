@@ -4,7 +4,7 @@ type InputGroupProps = {
 	id: string;
     name: string;
     type: string;
-	inputMode: string;
+	inputMode: React.HTMLAttributes<HTMLInputElement>['inputMode'];
 	label: string;
 	prefix?: string;
 	suffix?: string;
@@ -30,7 +30,7 @@ function InputGroup({ id, label, type, name, inputMode, value, onChange, prefix,
 					`, inputClassName, error && 'border-red', dirty && !error && 'border-lime')}
 				id={id}
 				type={type}
-				inputMode={inputMode === 'numeric' ? 'numeric' : 'text'}
+				inputMode={inputMode}
 				name={name}
 				value={value}
 				onChange={onChange}
