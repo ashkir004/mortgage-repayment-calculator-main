@@ -140,7 +140,7 @@ function MortgageCalculator() {
 
     return (
       <main className="flex flex-col gap-0
-        lg:flex-row bg-white md:rounded-3xl lg:max-w-6xl lg:shadow-xl/10 lg:shadow-slate-900/50
+        lg:flex-row bg-white md:rounded-3xl lg:max-w-5xl lg:shadow-xl/10 lg:shadow-slate-900/50
       ">
         <form id="mortgage-calculator" 
             className="grid grid-cols-1 gap-6
