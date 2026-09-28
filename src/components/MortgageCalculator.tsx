@@ -7,6 +7,7 @@ import type { FormData } from "../types";
 import MortageCalculatorResults from "./MortgageCalculatorResults";
 import MortgageCalculatorPreResults from "./MortgageCalculatorPreResults";
 import calculateMortgage from '../lib/calculateMortgage';
+import validateForm from '../lib/validateForm';
 import { formatNumber, sanitizeNumberInput } from '../lib/utils';
 
 
@@ -25,18 +26,6 @@ function MortgageCalculator() {
         monthlyRepayment: 0,
         totalRepayment: 0,
     });
-
-    function validateForm(myform: FormData) {
-        const errors: { [key: string]: string } = {};
-
-        Object.entries(myform).forEach(([key, field]) => {
-            if (!field) {
-                errors[key] = 'This field is required';
-            }
-        });
-
-        return errors;
-    }
 
     function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();

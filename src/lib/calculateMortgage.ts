@@ -6,7 +6,13 @@ function calculateMortgage(mortgageAmount: number, mortgageTerm: number, interes
 
     let monthlyRepayment, totalRepayment: number;
 
-    if (mortgageType === 'interestOnly') {
+    if (interestRate === 0 && mortgageType === 'repayment') {
+        monthlyRepayment = mortgageAmount / numberOfPayments;
+        totalRepayment = mortgageAmount;
+    } else if (interestRate === 0 && mortgageType === 'interestOnly') {
+        monthlyRepayment = 0;
+        totalRepayment = 0;
+    } else if (mortgageType === 'interestOnly') {
         monthlyRepayment = mortgageAmount * monthlyInterestRate;
         totalRepayment = monthlyRepayment * numberOfPayments;
     } else {
@@ -14,10 +20,7 @@ function calculateMortgage(mortgageAmount: number, mortgageTerm: number, interes
         totalRepayment = monthlyRepayment * numberOfPayments;
     }
 
-    return {
-        monthlyRepayment,
-        totalRepayment
-    };
+    return { monthlyRepayment, totalRepayment };
 }
 
 
