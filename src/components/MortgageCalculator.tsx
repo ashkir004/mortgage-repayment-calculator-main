@@ -149,7 +149,7 @@ function MortgageCalculator() {
         " onSubmit={handleSubmit}>
 
             <div className="flex flex-col gap-1 items-start md:flex-row md:justify-between md:col-span-full">
-                <h1 className='text-2xl text-slate-900' >Mortgage Calculator</h1>
+                <h1 className='text-2xl text-slate-900 font-bold' >Mortgage Calculator</h1>
                 <button 
                     type="button"
                     onClick={handleClearForm}
