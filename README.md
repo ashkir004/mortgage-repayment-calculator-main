@@ -48,10 +48,14 @@ src/
 │   ├── MortgageCalculatorPreResults.tsx
 │   ├── MortgageCalculatorResults.tsx
 │   └── MortgageTypeOptions.tsx
-└── lib/
-    ├── calculateMortgage.ts
-    ├── utils.ts
-    └── validateForm.ts
+├── lib/
+│   ├── calculateMortgage.ts
+│   ├── utils.ts
+│   └── validateForm.ts
+└── tests/
+    ├── MortgageCalculator.test.ts
+    ├── mortgage.test.ts
+    └── setup.ts
 ```
 
 ## State Model
@@ -247,26 +251,33 @@ The principal is not included in the monthly repayment calculation.
 * React
 * JavaScript
 * Vite
+* Vitest
 * Tailwind CSS
 * ESLint / Oxlint
 * Git / GitHub
 
-## Project Structure
 
-```text
-src/
-├── components/
-│   ├── MortgageForm.jsx
-│   ├── MortgageResults.jsx
-│   └── PreResults.jsx
-│
-├── utils/
-│   ├── calculateMortgage.js
-│   └── validateMortgage.js
-│
-├── App.jsx
-└── main.jsx
+## Tests
+
+The project includes automated tests for the calculator's validation and success states using Vitest and Testing Library.
+
+### Test Coverage
+
+The tests verify that the app:
+
+* shows validation errors when required inputs are missing
+* prevents invalid submissions
+* renders the results panel for a valid repayment calculation
+* renders the results panel for a valid interest-only calculation
+* clears the form when the user clicks the clear button
+
+### Run the Tests
+
+```bash
+pnpm run test
 ```
+
+This keeps the UI behavior covered without relying only on manual checking in the browser.
 
 ## Accessibility
 
